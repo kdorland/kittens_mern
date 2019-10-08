@@ -29,11 +29,13 @@ class Db {
     }
 
     async createKitten(newKitten) {
+        // TODO: Error handling
         let kitten = new this.kittenModel(newKitten);
         return kitten.save();
     }
 
     async addHobby(kittenId, hobby) {
+        // TODO: Error handling
         const kitten = await this.getKitten(kittenId);
         kitten.hobbies.push(hobby);
         return kitten.save();
@@ -42,7 +44,7 @@ class Db {
     /**
      * This method adds a bunch of test data if the database is empty.
      * @param count The amount of kittens to add.
-     * @returns {Promise} Resolves everything has been saved.
+     * @returns {Promise} Resolves when everything has been saved.
      */
     async bootstrap(count = 10) {
         const hobbies = ['sleeping', 'purring', 'eating', 'people watching'];
