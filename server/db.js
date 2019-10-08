@@ -83,7 +83,8 @@ class Db {
 // It resolves with an Db object instantiated from the class above.
 // The Db object is used for all data access in this app.
 module.exports.connectDb = async () => {
-    return mongoose.connect('mongodb://localhost/kitten_db', {useNewUrlParser: true, useUnifiedTopology: true})
+    const url = (process.env.MONGO_URL || 'mongodb://localhost/kitten_db');
+    return mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
         .then(() => {
             console.log("Kitten database connected");
             return new Db();
