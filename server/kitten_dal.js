@@ -1,12 +1,16 @@
-const mongoose = require('mongoose'); // We need the mongoose library
-
 class Db {
-    constructor() {
+    /**
+     * Constructors an object for accessing kittens in the database
+     * @param mongoose the mongoose object used to create schema objects for the database
+     */
+    constructor(mongoose) {
         // This is the schema we need to store kittens in MongoDB
         const kittenSchema = new mongoose.Schema({
             name: String,
             hobbies: [String] // A list of hobbies as string
         });
+
+        // This model is used in the methods of this class to access kittens
         this.kittenModel = mongoose.model('kitten', kittenSchema);
     }
 
@@ -80,16 +84,5 @@ class Db {
     }
 }
 
-// We are exporting an async function named 'ConnectDb'.
-// It only resolves when the database connection is ready.
-// It resolves with an Db object instantiated from the class above.
-// The Db object is used for all data access in this app.
-module.exports.connectDb = async () => {
-    const url = (process.env.MONGO_URL || 'mongodb://localhost/kitten_db');
-    return mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true})
-        .then(() => {
-            console.log("Kitten database connected");
-            return new Db();
-        })
-        .catch(error => { console.error(error) });
-};
+// We export the object used to access the kittens in the database
+module.exports = mongoose => new Db(mongoose);
