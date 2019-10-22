@@ -18,8 +18,11 @@ const kittenDAL = require('./kitten_dal')(mongoose);
 
 /**** Routes ****/
 app.get('/api/kittens', (req, res) => {
-    // Get all kittens. Put kitten into json response when it resolves.
-    kittenDAL.getKittens().then(kittens => res.json(kittens));
+    // Get all kittens EXCLUDING any hobbies.
+    kittenDAL.getKittens().then(kittens => {
+        console.log(kittens);
+        res.json(kittens.reduce((a,c) => [...a, {_id: c._id, name: c.name}], []));
+    });
 });
 
 app.get('/api/kittens/:id', (req, res) => {
