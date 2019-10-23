@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 
 /**** Configuration ****/
 const port = (process.env.PORT || 8080);
@@ -40,6 +41,12 @@ app.post('/api/kittens/:id/hobbies', (req, res) => {
     kittenDAL.addHobby(req.params.id, req.body.hobby)
         .then(updatedKitten => res.json(updatedKitten));
 });
+
+// "Redirect" all get requests (except for the routes specified above) to React's entry point (index.html) to be handled by Reach router
+// It's important to specify this route as the very last one to prevent overriding all of the other routes
+app.get('*', (req, res) =>
+    res.sendFile(path.resolve('..', 'client', 'build', 'index.html'))
+);
 
 /**** Start ****/
 const url = (process.env.MONGO_URL || 'mongodb://localhost/kitten_db');
