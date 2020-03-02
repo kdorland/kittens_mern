@@ -12,7 +12,7 @@ class Kitten extends Component {
                 <>
                     <h1>{kitten.name}</h1>
 
-                    <h3>Pastimes</h3>
+                    <h3>Hobbies</h3>
                     <ul>
                         {kitten.hobbies.map(h => <li key={h}>{h}</li>)}
                     </ul>
