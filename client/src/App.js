@@ -36,12 +36,12 @@ class App extends Component {
 
     render() {
         return (
-            <div className="container">
+            <>
                 <Router>
-                    <Kitten path="/kitten/:id" getKitten={id => this.getKitten(id)} />
+                    <Kitten path="/kitten/:id" getKitten={id => this.getKitten(id)}/>
                     <Kittens path="/" kittens={this.state.kittens}/>
                 </Router>
-            </div>
+            </>
         );
     }
 }

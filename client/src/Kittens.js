@@ -4,16 +4,18 @@ import {Link} from "@reach/router";
 class Kittens extends Component {
 
     render() {
+        const kittens = this.props.kittens.map(kitten =>
+            <li key={kitten._id}>
+                <Link to={`/kitten/${kitten._id}`}>{kitten.name}</Link>
+            </li>
+        );
         return (
-            <React.Fragment>
+            <>
                 <h1>Kittens</h1>
                 <ol>
-                    {this.props.kittens.map(kitten =>
-                        <li key={kitten._id}>
-                            <Link to={`/kitten/${kitten._id}`}>{kitten.name}</Link>
-                        </li>)}
+                    {kittens}
                 </ol>
-            </React.Fragment>
+            </>
         );
     }
 

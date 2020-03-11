@@ -2,10 +2,8 @@ import React, {Component} from 'react';
 import {Link} from "@reach/router";
 
 class Kitten extends Component {
-
     render() {
         const kitten = this.props.getKitten(this.props.id);
-
         let content = <p>Loading</p>;
         if (kitten) {
             content =
@@ -20,7 +18,6 @@ class Kitten extends Component {
                     <Link to="/">Back</Link>
                 </>
         }
-
         return content;
     }
 }

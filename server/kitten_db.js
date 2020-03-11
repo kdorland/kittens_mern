@@ -35,14 +35,14 @@ class Db {
     async createKitten(newKitten) {
         // TODO: Error handling
         let kitten = new this.kittenModel(newKitten);
-        return kitten.save();
+        return await kitten.save();
     }
 
     async addHobby(kittenId, hobby) {
         // TODO: Error handling
         const kitten = await this.getKitten(kittenId);
         kitten.hobbies.push(hobby);
-        return kitten.save();
+        return await kitten.save();
     }
 
     /**
